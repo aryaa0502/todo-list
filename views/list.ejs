@@ -1,0 +1,92 @@
+<%- include("header") -%>
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: rgba(63, 88, 211, 0.793);"">
+      <a class="navbar-brand" href="">
+        <div class="flex">
+          <h3 style="margin-right: 3px;">To Do List</h3>
+          <svg
+            stroke="currentColor"
+            fill="currentColor"
+            stroke-width="0"
+            version="1"
+            viewBox="0 0 48 48"
+            enable-background="new 0 0 48 48"
+            height="1.5em"
+            width="1.5em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g fill="#3F51B5">
+              <polygon
+                points="17.8,18.1 10.4,25.4 6.2,21.3 4,23.5 10.4,29.9 20,20.3"
+              ></polygon>
+              <polygon
+                points="17.8,5.1 10.4,12.4 6.2,8.3 4,10.5 10.4,16.9 20,7.3"
+              ></polygon>
+              <polygon
+                points="17.8,31.1 10.4,38.4 6.2,34.3 4,36.5 10.4,42.9 20,33.3"
+              ></polygon>
+            </g>
+            <g fill="#90CAF9">
+              <rect x="24" y="22" width="20" height="4"></rect>
+              <rect x="24" y="9" width="20" height="4"></rect>
+              <rect x="24" y="35" width="20" height="4"></rect>
+            </g>
+          </svg>
+        </div>
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav navbarNav">
+          <li class="nav-item active">
+            <a class="nav-link" href="/" onmouseover="this.style.fontWeight = 'bold'" onmouseleave="this.style.fontWeight = 'normal'" style="color:white; font-size: 20px;">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/work" onmouseover="this.style.fontWeight = 'bold'" onmouseleave="this.style.fontWeight = 'normal'" style="color:white; font-size: 20px;">Work</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/grocery" onmouseover="this.style.fontWeight = 'bold'" onmouseleave="this.style.fontWeight = 'normal'" style="color:white; font-size: 20px;">Groceries</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- <div class="gradient-background"> -->
+
+    <div class="box" id="heading">
+      <div class="flexHeadingBar">
+        <h3><%= listType %></h3>
+        <svg stroke="currentColor" fill="white" stroke-width="0" viewBox="0 0 512 512" height="2em" width="2em" xmlns="http://www.w3.org/2000/svg"><path d="M210.7 147.6c7.5-7.5 19.8-7.5 27.3 0l95.4 95.7c7.3 7.3 7.5 19.1.6 26.6l-94 94.3c-3.8 3.8-8.7 5.7-13.7 5.7-4.9 0-9.9-1.9-13.6-5.6-7.5-7.5-7.6-19.7 0-27.3l79.9-81.1-81.9-81.1c-7.6-7.4-7.6-19.6 0-27.2z"></path><path d="M48 256c0 114.9 93.1 208 208 208s208-93.1 208-208S370.9 48 256 48 48 141.1 48 256zm32 0c0-47 18.3-91.2 51.6-124.4C164.8 98.3 209 80 256 80s91.2 18.3 124.4 51.6C413.7 164.8 432 209 432 256s-18.3 91.2-51.6 124.4C347.2 413.7 303 432 256 432s-91.2-18.3-124.4-51.6C98.3 347.2 80 303 80 256z"></path></svg>
+        <h3><%= kindOfDay %></h3>
+      </div>
+    </div>
+
+    <div class="box">
+
+      <% newListItems.forEach((newItem) => {%>
+        <form action="/delete" method="post">
+        <% if(newItem !== ""){ %>
+            <div class="item">
+              <input type="checkbox" name="checkbox" value="<%= newItem._id %>" onchange="this.form.submit()" />
+              <p><%= newItem.name %></p>
+            </div>
+            <input type="hidden" name="listName" value="<%= listType %>"></input>
+        <% } %>
+          </form>
+      <% }); %>
+
+      <form class="item" action="/" method="post">
+        <input
+          type="text"
+          name="newItem"
+          placeholder="Add New Task"
+          autocomplete="off"
+          autofocus
+        />
+        <button type="submit" name="list" value="<%= listType %>" class="boxbtn">+</button>
+      </form>
+
+    </div>
+  <!-- </div> -->
+    <%- include("footer") -%>
+
